@@ -17,9 +17,13 @@ public class TileScript : MonoBehaviour {
 		
 	}
 
-    public void Setter(Coordinate gridPos,Vector3 startPos)
+    public void Setter(Coordinate gridPos,Vector3 startPos,Transform parent)
     {
         this.GridPosition = gridPos;
         transform.position = startPos;
+        transform.SetParent(parent);
+        // Map.Instance.Tiles.Add(gridPos, this);
+
+
     }
 }
