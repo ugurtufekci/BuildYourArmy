@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour {
 
@@ -24,6 +23,23 @@ public class TileScript : MonoBehaviour {
         transform.SetParent(parent);
         // Map.Instance.Tiles.Add(gridPos, this);
 
+    }
 
+    private void OnMouseOver()
+    {
+        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlaceBuilding();
+            }
+        }
+    }
+    private void PlaceBuilding()
+    {
+        GameObject building = (GameObject)Instantiate(GameManager.Instance.ClickedButton.BuildingPrefab, transform.position, Quaternion.identity);
+        building.transform.SetParent(transform); // center of a building is a child of a tile now.
+
+        GameManager.Instance.ClickBuildingButtonEveryTime();
     }
 }
