@@ -7,6 +7,9 @@ public class BuildingButton : MonoBehaviour {
     [SerializeField]
     private GameObject buildingPrefab;
 
+    [SerializeField]
+    private Sprite sprite;
+
     public GameObject BuildingPrefab
     {
         get
@@ -14,6 +17,14 @@ public class BuildingButton : MonoBehaviour {
             return buildingPrefab;
         }
     }
+
+    public Sprite Sprite
+    {
+        get
+        {
+            return sprite;
+        }
+     }
 
     // Use this for initialization
     void Start () {

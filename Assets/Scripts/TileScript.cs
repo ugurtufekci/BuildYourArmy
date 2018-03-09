@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour {
@@ -21,7 +22,7 @@ public class TileScript : MonoBehaviour {
         this.GridPosition = gridPos;
         transform.position = startPos;
         transform.SetParent(parent);
-        // Map.Instance.Tiles.Add(gridPos, this);
+       // Map.Instance.Tiles.Add(gridPos,this);
 
     }
 
@@ -38,8 +39,10 @@ public class TileScript : MonoBehaviour {
     private void PlaceBuilding()
     {
         GameObject building = (GameObject)Instantiate(GameManager.Instance.ClickedButton.BuildingPrefab, transform.position, Quaternion.identity);
-        building.transform.SetParent(transform); // center of a building is a child of a tile now.
-
+        // center of a building is a child of a tile now.
+        building.transform.SetParent(transform); 
+        //hide hover when user create one building.
+        Hover.Instance.HideHover(); 
         GameManager.Instance.ClickBuildingButtonEveryTime();
     }
 }

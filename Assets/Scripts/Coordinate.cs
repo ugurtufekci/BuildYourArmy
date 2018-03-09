@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct Coordinate
 {
-    
+    //property
     public int X { get; set; }
 
     public int Y { get; set; }

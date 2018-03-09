@@ -21,10 +21,16 @@ public class GameManager : Singleton<GameManager> {
     public void SelectBuilding(BuildingButton buildingButton) 
     {
         this.ClickedButton = buildingButton;
+        Hover.Instance.ShowHover(buildingButton.Sprite);
     }
 
     public void ClickBuildingButtonEveryTime()
     {
         ClickedButton = null;
     }
+
+    /*private IEnumerator SpawnSoldier()
+    {
+
+    }*/
 }

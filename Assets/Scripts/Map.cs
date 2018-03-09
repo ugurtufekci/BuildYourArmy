@@ -11,6 +11,8 @@ namespace Assets.Scripts
         [SerializeField]
         private Transform alltiles;
 
+        public Dictionary<Coordinate, TileScript> Tiles { get; set; }
+
         //TileSize is a property "not field", so we can access from other scripts
         //Caltulates the size of tiles then return
         public float TileSize   
@@ -18,7 +20,7 @@ namespace Assets.Scripts
             get { return tile.GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
         }
 
-        public Dictionary<Coordinate,TileScript> Tiles { get; set; }
+        
 
 
         // Use this for initialization
@@ -37,17 +39,16 @@ namespace Assets.Scripts
         private void CreateTiles()
         {
             Tiles = new Dictionary<Coordinate, TileScript>();
-
-            int j;
+            
             //Initializing the starting tile close to the left corner(next to the production menu). this will be optimized later.
-            Vector3 tileStart = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 5.0f, Screen.height)); 
-            for( j = 0; j < 10; j++) //row
+            Vector3 tileStart = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 5.0f, Screen.height));
+            int i, j;
+            for ( j = 0; j < 10; j++) //row
             {
-                int i;
+                
                 for( i = 0; i < 8; i++)  //column
                 {
-                    
-                    PlaceTiles(i, j, tileStart);
+                   PlaceTiles(i, j, tileStart);
                 }
             }
         }
