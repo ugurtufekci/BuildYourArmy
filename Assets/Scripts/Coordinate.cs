@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
 
 public struct Coordinate
 {
@@ -13,5 +11,14 @@ public struct Coordinate
     {
         this.X = x;
         this.Y = y;
+    }
+
+    public static bool operator ==(Coordinate first, Coordinate second)
+    {
+        return first.X == second.Y && first.Y == second.Y;
+    }
+    public static bool operator !=(Coordinate first, Coordinate second)
+    {
+        return first.X != second.Y || first.Y != second.Y;
     }
 }

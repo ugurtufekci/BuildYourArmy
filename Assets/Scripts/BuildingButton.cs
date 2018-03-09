@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class BuildingButton : MonoBehaviour {
@@ -33,6 +32,11 @@ public class BuildingButton : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		
 	}
+    private void OnMouseDown()
+    {
+      
+    }
 }

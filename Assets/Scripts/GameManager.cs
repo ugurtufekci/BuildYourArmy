@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : Singleton<GameManager> {
 
@@ -26,7 +24,17 @@ public class GameManager : Singleton<GameManager> {
 
     public void ClickBuildingButtonEveryTime()
     {
+        //hide hover when user create one building.
+        Hover.Instance.HideHover();
         ClickedButton = null;
+    }
+
+    private void EscapeBuilding()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Hover.Instance.HideHover();
+        }
     }
 
     /*private IEnumerator SpawnSoldier()

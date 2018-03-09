@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Experimental.UIElements;
 using System.Collections.Generic;
 namespace Assets.Scripts
 {
@@ -10,6 +9,8 @@ namespace Assets.Scripts
 
         [SerializeField]
         private Transform alltiles;
+
+        private Coordinate mapSize;
 
         public Dictionary<Coordinate, TileScript> Tiles { get; set; }
 
@@ -49,8 +50,10 @@ namespace Assets.Scripts
                 for( i = 0; i < 8; i++)  //column
                 {
                    PlaceTiles(i, j, tileStart);
+                    
                 }
             }
+            mapSize = new Coordinate(10, 8);
         }
         private void PlaceTiles(int i, int j, Vector3 tileStart)
         {
@@ -58,10 +61,14 @@ namespace Assets.Scripts
           
             newTile.Setter(new Coordinate(i, j), new Vector3(tileStart.x + TileSize * i, tileStart.y - TileSize * j, 0),alltiles);
             // Tiles added to dictionary
-            Tiles.Add(new Coordinate(i, j), newTile); 
-
-            
+           
+         
         }
-     
+
+        public bool InMap(Coordinate pos)
+        {
+            return pos.X >= 0 && pos.Y >= 0 && pos.X < mapSize.X && pos.Y < mapSize.Y;
+        }
+
     }
 }

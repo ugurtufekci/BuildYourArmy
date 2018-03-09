@@ -6,12 +6,24 @@ public class TileScript : MonoBehaviour {
 
 
     public Coordinate GridPosition { get; private set; }
+    //Control the tile is avaliable or not
+    public bool IsEmpty { get; private set; }
+
+    private Color32 unavaliableColor = new Color32(255,118,118, 255);
+    private Color32 avaliableColor = new Color32(96, 255, 90, 255);
+
+   
+    public SpriteRenderer SpriteRenderer { get; set; }
+
+    public bool Debugging { get; set; }
+
+    public bool Walkable { get; set; }
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
+    void Start()
+    {
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+    }
 	// Update is called once per frame
 	void Update () {
 		
@@ -19,10 +31,12 @@ public class TileScript : MonoBehaviour {
 
     public void Setter(Coordinate gridPos,Vector3 startPos,Transform parent)
     {
+        Walkable = true;
+        IsEmpty = true;
         this.GridPosition = gridPos;
         transform.position = startPos;
         transform.SetParent(parent);
-       // Map.Instance.Tiles.Add(gridPos,this);
+        Map.Instance.Tiles.Add(gridPos,this);
 
     }
 
@@ -30,19 +44,56 @@ public class TileScript : MonoBehaviour {
     {
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (IsEmpty && !Debugging)
+            {
+                ColorTile(avaliableColor);
+            }
+            if (!IsEmpty && !Debugging)
+            {
+                ColorTile(unavaliableColor);
+            }
+            else if (Input.GetMouseButtonDown(0))
             {
                 PlaceBuilding();
             }
         }
     }
+    private void OnMouseDown()
+    {
+       
+
+    }
+    private void OnMouseExit()
+    {
+        if (!Debugging)
+        {
+            ColorTile(Color.white);
+        }
+       
+    }
+
     private void PlaceBuilding()
     {
         GameObject building = (GameObject)Instantiate(GameManager.Instance.ClickedButton.BuildingPrefab, transform.position, Quaternion.identity);
-        // center of a building is a child of a tile now.
+
+        
         building.transform.SetParent(transform); 
-        //hide hover when user create one building.
-        Hover.Instance.HideHover(); 
+        
+        IsEmpty = false;
+        
+        ColorTile(Color.white);
+       
         GameManager.Instance.ClickBuildingButtonEveryTime();
+        Walkable = false;
+    }
+    
+    public void ColorTile(Color newColor)
+    {
+        SpriteRenderer.color = newColor;
+    }
+
+    public void BuildingSurface()
+    {
+
     }
 }
