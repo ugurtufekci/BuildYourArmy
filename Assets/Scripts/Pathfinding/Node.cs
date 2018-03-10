@@ -13,5 +13,10 @@ public class Node {
         this.TileRef = tileRef;
         this.GridPosition = tileRef.GridPosition;
     }
-	
+    public Node Parent { get; private set; }
+
+    public void CalculateValues(Node parent)
+    {
+        this.Parent = parent;
+    }
 }

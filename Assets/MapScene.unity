@@ -1285,6 +1285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 0}
   finish: {fileID: 0}
+  arrowPrefab: {fileID: 1628299293036086, guid: cdf5957918c59c34e99f42b57129966f,
+    type: 2}
 --- !u!1 &2071743891
 GameObject:
   m_ObjectHideFlags: 0

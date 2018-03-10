@@ -22,8 +22,6 @@ namespace Assets.Scripts
         }
 
         
-
-
         // Use this for initialization
         void Start ()
         {
@@ -60,9 +58,6 @@ namespace Assets.Scripts
             TileScript newTile = Instantiate(tile).GetComponent<TileScript>();
           
             newTile.Setter(new Coordinate(i, j), new Vector3(tileStart.x + TileSize * i, tileStart.y - TileSize * j, 0),alltiles);
-            // Tiles added to dictionary
-           
-         
         }
 
         public bool InMap(Coordinate pos)
