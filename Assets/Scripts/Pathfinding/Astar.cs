@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class Astar
@@ -17,7 +18,7 @@ public static class Astar
         }
     }
     //path generation
-    public static void GetPath(Coordinate start)
+    public static void GetPath(Coordinate start, Coordinate finish)
     {
         if (nodes == null)
         {
@@ -27,37 +28,72 @@ public static class Astar
         HashSet<Node> openList = new HashSet<Node>();
 
         HashSet<Node> closeList = new HashSet<Node>();
+
+        Stack<Node> finalPath = new Stack<Node>();
         
         Node currentNode = nodes[start];
         //adding start node to openlist
         openList.Add(currentNode);
 
-        //look around the node
-        for (int x = -1; x <= 1; x++)
+        while (openList.Count > 0) //keep searching until the openList is empty
         {
-            for (int y = -1; y <= 1; y++)
+            //look around the node
+            for (int x = -1; x <= 1; x++)
             {
-                //current node = x10,y10 become 9,9
-                Coordinate neighbourPos = new Coordinate(currentNode.GridPosition.X - x, currentNode.GridPosition.Y - y);
-
-                if (Map.Instance.InMap(neighbourPos) && Map.Instance.Tiles[neighbourPos].Walkable && neighbourPos != currentNode.GridPosition)
+                for (int y = -1; y <= 1; y++)
                 {
-                    Node neighbour = nodes[neighbourPos];
-                    if (!openList.Contains(neighbour))
+                    Coordinate neighbourPos = new Coordinate(currentNode.GridPosition.X - x, currentNode.GridPosition.Y - y);
+
+                    if (Map.Instance.InMap(neighbourPos) && Map.Instance.Tiles[neighbourPos].Walkable && neighbourPos != currentNode.GridPosition)
                     {
-                        openList.Add(neighbour);
+                        int gCost = 0;
+
+                        if (Mathf.Abs(x - y) == 1)
+                        {
+                            gCost = 10;
+                        }
+                        else
+                        {
+                            gCost = 14;
+                        }
+                        //adding neighbour to the openlist
+                        Node neighbour = nodes[neighbourPos];
+                        
+                        if (openList.Contains(neighbour))
+                        {
+                            if (currentNode.Gcost + gCost < neighbour.Gcost) //if its true, current node has a better parent
+                            {
+                                neighbour.CalculateValues(currentNode, nodes[finish], gCost); //set current node as a parent then calculate values.
+                            }
+                        }
+                        else if (!closeList.Contains(neighbour))//if its not on the open list and its not on the close list,
+                        {                                       
+                            openList.Add(neighbour);            //this node should be new neighbour.
+                            neighbour.CalculateValues(currentNode, nodes[finish], gCost);
+                        }
                     }
-                    //Calculate all values for the neighbour
-                    neighbour.CalculateValues(currentNode);
-
-
                 }
+            }
 
+            openList.Remove(currentNode); //if its discarded from the openlist then this node will be closed(add to the closelist)
+            closeList.Add(currentNode);
+
+            if (openList.Count > 0)
+            {
+                //Sorts the list bu F value then select the first one.
+                currentNode = openList.OrderBy(n => n.Fcost).First();
+            }
+
+            if(currentNode == nodes[finish])
+            {
+                while(currentNode.GridPosition != start)
+                {
+                    finalPath.Push(currentNode);
+                    currentNode = currentNode.Parent;
+                }
+                break;
             }
         }
-
-        openList.Remove(currentNode); //if its discarded from the openlist then this node will be closed(add to the closelist)
-        closeList.Add(currentNode); 
         
         //just for the test
         GameObject.Find("TestAstar").GetComponent<TestAstar>().ShowPath(openList, closeList);

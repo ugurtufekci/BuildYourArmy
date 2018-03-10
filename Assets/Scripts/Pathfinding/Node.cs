@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ public class Node {
 
     public TileScript TileRef { get; private set; }
 
+    public int Gcost { get; set; }
+    public int Hcost { get; set; }
+    public int Fcost { get; set; }
+
     public Node(TileScript tileRef)
     {
         this.TileRef = tileRef;
@@ -15,8 +20,12 @@ public class Node {
     }
     public Node Parent { get; private set; }
 
-    public void CalculateValues(Node parent)
+    public void CalculateValues(Node parent,Node finish,int gCost)
     {
         this.Parent = parent;
+        this.Gcost = parent.Gcost + gCost;
+        this.Hcost = (Math.Abs(GridPosition.X - finish.GridPosition.X)) +(Math.Abs(finish.GridPosition.Y-GridPosition.Y))* 10;
+        this.Fcost = Gcost + Fcost;
     }
 }
+ 

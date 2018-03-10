@@ -4,8 +4,7 @@ using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
 {
-
-    public Coordinate GridPosition { get; private set; }
+     public Coordinate GridPosition { get; private set; }
 
     //Control the tile is avaliable or not
     public bool IsEmpty { get; private set; }

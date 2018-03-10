@@ -25,7 +25,7 @@ public class TestAstar : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Astar.GetPath(start.GridPosition);
+            Astar.GetPath(start.GridPosition,finish.GridPosition);
         }
     }
     private void ClickTile()
@@ -55,7 +55,6 @@ public class TestAstar : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void ShowPath(HashSet<Node> openList, HashSet<Node> closeList)
@@ -66,6 +65,7 @@ public class TestAstar : MonoBehaviour
             {
                 node.TileRef.SpriteRenderer.color = Color.blue;
             }
+
             PointParent(node, node.TileRef.WorldPosition);
         }
         foreach (Node node in closeList)
