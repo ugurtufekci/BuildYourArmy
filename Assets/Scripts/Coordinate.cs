@@ -1,6 +1,6 @@
 ﻿public struct Coordinate
 {
-    //property
+  
     public int X { get; set; }
 
     public int Y { get; set; }
@@ -19,4 +19,9 @@
     {
         return first.X != second.Y || first.Y != second.Y;
     }
+    public static Coordinate operator -(Coordinate x, Coordinate y)
+    {
+        return new Coordinate(x.X - y.X, x.Y - y.Y);
+    }
+
 }

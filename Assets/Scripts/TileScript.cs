@@ -1,5 +1,4 @@
-﻿using Assets.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
@@ -22,7 +21,7 @@ public class TileScript : MonoBehaviour
     private Color32 avaliableColor = new Color32(96, 255, 90, 255);
 
 
-    public SpriteRenderer SpriteRenderer { get; set; }
+    public SpriteRenderer spriteRenderer { get; set; }
 
     public bool Debugging { get; set; }
 
@@ -31,7 +30,7 @@ public class TileScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        SpriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     // Update is called once per frame
     void Update()
@@ -52,7 +51,7 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseOver()
     {
-        //place the building on a tile. if mouse is over the button dont do that.
+        //place the building on a tile
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
         {
             if (IsEmpty && !Debugging)
@@ -95,6 +94,6 @@ public class TileScript : MonoBehaviour
 
     public void ColorTile(Color newColor)
     {
-        SpriteRenderer.color = newColor;
+        spriteRenderer.color = newColor;
     }
 }

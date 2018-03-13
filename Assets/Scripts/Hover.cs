@@ -22,8 +22,9 @@ public class Hover : Singleton<Hover>
     {
         if (spriteRenderer.enabled)
         {
+            //set mouse position into a world position
             transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //set the z value to "0"
+           
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
         
@@ -38,6 +39,8 @@ public class Hover : Singleton<Hover>
     public void HideHover()
     {
         spriteRenderer.enabled = false;
+
+        GameManager.Instance.ClickedButton = null;
     }
 
 }

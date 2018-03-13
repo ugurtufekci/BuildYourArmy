@@ -1,19 +1,30 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class GameManager : Singleton<GameManager> {
 
     //tilescript can access the clickButton and get the prefab and place the prefab on the tile
-    public BuildingButton ClickedButton { get; private set; } 
+    public BuildingButton ClickedButton { get;  set; }
+
+    public ObjectPool Pool { get; set; }
+
+    private void Awake()
+    {
+        Pool = GetComponent<ObjectPool>();
+    }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        EscapeBuilding();
+
+    }
 
     //when we click the button it selects a building then set a reference into ClickButton
     public void SelectBuilding(BuildingButton buildingButton) 
@@ -26,7 +37,7 @@ public class GameManager : Singleton<GameManager> {
     {
         //hide hover when user create one building.
         Hover.Instance.HideHover();
-        ClickedButton = null;
+        
     }
 
     private void EscapeBuilding()
@@ -37,8 +48,23 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    /*private IEnumerator SpawnSoldier()
+    public void StartWave()
+    {
+        StartCoroutine(SpawnSoldier());
+    }
+
+   
+    private IEnumerator SpawnSoldier()
     {
 
-    }*/
+        string type = string.Empty;
+         type = "Soldier";
+        
+        //Requests the soldier from the pool
+        Soldier soldier = Pool.GetObject(type).GetComponent<Soldier>();
+
+        soldier.Spawn();
+
+        yield return new WaitForSeconds(2.0f);
+    }
 }
