@@ -17,7 +17,7 @@ public class ScrollList : MonoBehaviour
    
     private void AddButtons()
     {
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 500; i++)
         {
            
             GameObject newButton = buttonObjectPool.GetObject();

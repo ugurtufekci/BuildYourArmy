@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour {
+public class SpawnPoints : MonoBehaviour {
 
     private SpriteRenderer mySpriteRenderer;
 
@@ -16,9 +16,5 @@ public class Building : MonoBehaviour {
 		
 	}
 
-    public void Select()
-    {
-        mySpriteRenderer.enabled = !mySpriteRenderer.enabled;
-       
-    }
+   
 }

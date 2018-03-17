@@ -111,7 +111,7 @@ public static class Astar
             }
         }
         //test
-        GameObject.Find("TestAstar").GetComponent<TestAstar>().DebugPath(openList, closeList, finalPath);
+       // GameObject.Find("TestAstar").GetComponent<TestAstar>().DebugPath(openList, closeList, finalPath);
 
         return finalPath;
 

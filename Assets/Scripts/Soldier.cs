@@ -17,9 +17,11 @@ public class Soldier : MonoBehaviour
    
     public bool IsActive { get; set; }
 
-    
-    private Vector3 destination;
+    public bool StartMove { get; set; }
 
+
+    private Vector3 destination;
+    
     private void Update()
     {
         Move();
@@ -34,8 +36,9 @@ public class Soldier : MonoBehaviour
         //Starts to scale the soldier
         StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(1, 1)));
 
-        //Sets the monsters path
+        //Sets the path
         SetPath(Map.Instance.Path, false);
+        StartMove = false;
     }
 
     public IEnumerator Scale(Vector3 from, Vector3 to)
@@ -61,7 +64,21 @@ public class Soldier : MonoBehaviour
    
     public void Move()
     {
-        if (IsActive)
+        if (Input.GetMouseButtonDown(0)) //Craete a raycast if we click a tile
+        {
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+            if (hit.collider.tag=="LandTag")
+            {
+                destination = hit.point;
+                Debug.Log(destination);
+                StartMove = true;
+                
+            }
+        }
+        Debug.Log(StartMove);
+
+        if (IsActive && StartMove)
         {
             //Move the unit towards the next destination
             transform.position = Vector2.MoveTowards(transform.position, destination, speed * Time.deltaTime);

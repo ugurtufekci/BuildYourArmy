@@ -7,7 +7,7 @@ public class TestAstar : MonoBehaviour
 
     private TileScript start, finish;
 
-    [SerializeField]
+   /* [SerializeField]
     private Sprite blankTile;
 
     [SerializeField]
@@ -15,7 +15,7 @@ public class TestAstar : MonoBehaviour
 
     [SerializeField]
     private GameObject debugTilePrefab;
-
+    */
 
     // Use this for initialization
     void Start()
@@ -51,13 +51,13 @@ public class TestAstar : MonoBehaviour
                     if (start == null)
                     {
                         start = tmp;
-                        CreateDebugTile(start.WorldPosition, new Color32(255, 135, 0, 255));
+                        //CreateDebugTile(start.WorldPosition, new Color32(255, 135, 0, 255));
 
                     }
                     else if (finish == null)
                     {
                         finish = tmp;
-                        CreateDebugTile(finish.WorldPosition, new Color32(255, 0, 0, 255));
+                       // CreateDebugTile(finish.WorldPosition, new Color32(255, 0, 0, 255));
 
                     }
                 }
@@ -66,7 +66,7 @@ public class TestAstar : MonoBehaviour
     }
 
 
-    public void DebugPath(HashSet<Node> openList, HashSet<Node> closedList, Stack<Node> path)
+    /*public void DebugPath(HashSet<Node> openList, HashSet<Node> closedList, Stack<Node> path)
     {
         foreach (Node node in openList)//Colors all the tiles blue so that we can see which tiles are in the open list
         {
@@ -98,9 +98,9 @@ public class TestAstar : MonoBehaviour
                 CreateDebugTile(node.TileRef.WorldPosition, Color.green, node);
             }
         }
-    }
+    }*/
 
-    private void PointToParent(Node node, Vector2 position)
+   /* private void PointToParent(Node node, Vector2 position)
     {
         if (node.Parent != null) //Checks if the node has a parent
         {
@@ -150,9 +150,9 @@ public class TestAstar : MonoBehaviour
 
         }
 
-    }
+    }*/
 
-    private void CreateDebugTile(Vector3 worldPos, Color32 color, Node node = null)
+    /*private void CreateDebugTile(Vector3 worldPos, Color32 color, Node node = null)
     {
         //Instantiates a debug tile
         GameObject debugTile = (GameObject)Instantiate(debugTilePrefab, worldPos, Quaternion.identity);
@@ -168,5 +168,5 @@ public class TestAstar : MonoBehaviour
         }
         //Sets the color of the tile
         debugTile.GetComponent<SpriteRenderer>().color = color;
-    }
+    }*/
 }

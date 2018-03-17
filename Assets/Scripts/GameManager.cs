@@ -8,6 +8,11 @@ public class GameManager : Singleton<GameManager> {
 
     public ObjectPool Pool { get; set; }
 
+    [SerializeField]
+    private GameObject informationPanel;
+    
+    private Building selectedBuilding;
+
     private void Awake()
     {
         Pool = GetComponent<ObjectPool>();
@@ -31,6 +36,43 @@ public class GameManager : Singleton<GameManager> {
     {
         this.ClickedButton = buildingButton;
         Hover.Instance.ShowHover(buildingButton.Sprite);
+    }
+
+    public void ChosenBuilding(Building building)
+    {
+        if (selectedBuilding != null)//If we have selected a building
+        {
+            //Selects the building
+            selectedBuilding.Select();
+        }
+
+        //Sets the selected building
+        selectedBuilding = building;
+
+        //Selects the building
+        selectedBuilding.Select();
+
+
+
+        informationPanel.SetActive(true);
+
+
+    }
+
+    public void IgnoredBuilding()
+    {
+        //If we have a selected building
+        if (selectedBuilding != null)
+        {
+            //Calls select to deselect it
+            selectedBuilding.Select();
+        }
+
+        informationPanel.SetActive(false);
+
+        //Remove the reference to the building
+        selectedBuilding = null;
+
     }
 
     public void ClickBuildingButtonEveryTime()
