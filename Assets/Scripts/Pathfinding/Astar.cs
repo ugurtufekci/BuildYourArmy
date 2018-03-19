@@ -110,9 +110,7 @@ public static class Astar
                 break;
             }
         }
-        //test
-       // GameObject.Find("TestAstar").GetComponent<TestAstar>().DebugPath(openList, closeList, finalPath);
-
+       
         return finalPath;
 
         

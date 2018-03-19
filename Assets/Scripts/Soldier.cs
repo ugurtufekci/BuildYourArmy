@@ -10,7 +10,6 @@ public class Soldier : MonoBehaviour
 
     
     private Stack<Node> path;
-
     
     public Coordinate GridPosition { get; set; }
 
@@ -64,22 +63,12 @@ public class Soldier : MonoBehaviour
    
     public void Move()
     {
-        if (Input.GetMouseButtonDown(0)) //Craete a raycast if we click a tile
-        {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-            if (hit.collider.tag=="LandTag")
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+           
+        
+            if (IsActive)
             {
-                destination = hit.point;
-                Debug.Log(destination);
-                StartMove = true;
-                
-            }
-        }
-        Debug.Log(StartMove);
-
-        if (IsActive && StartMove)
-        {
             //Move the unit towards the next destination
             transform.position = Vector2.MoveTowards(transform.position, destination, speed * Time.deltaTime);
 

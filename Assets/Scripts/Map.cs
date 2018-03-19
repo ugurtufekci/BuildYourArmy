@@ -5,7 +5,6 @@ public class Map : Singleton<Map>
 {
     [SerializeField]
     private GameObject tile;
-
     
     [SerializeField]
     private Transform alltiles;
@@ -60,7 +59,7 @@ public class Map : Singleton<Map>
     // Update is called once per frame
     void Update()
     {
-      
+       
     }
 
     private void CreateTiles()
@@ -104,29 +103,16 @@ public class Map : Singleton<Map>
         GameObject tmp = (GameObject)Instantiate(soldierSpawnPrefab, Tiles[soldierSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
         SoldierSpawn = tmp.GetComponent<SpawnPoints>();
 
-        if (Input.GetMouseButtonDown(0)) //Craete a raycast if we click a tile
-        {
-            Debug.Log("adsasdasdasda");
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            int a, b;
-            if (hit.collider.tag == "LandTag")
-            {
-                a = (int)transform.position.x;
-                b = (int)transform.position.x;
-                Debug.Log(a + "dawsda " + b);
-                soldierGoal = new Coordinate(a,b);
-                Instantiate(soldierGoalPrefab, Tiles[soldierGoal].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
-            }
-        }
+      
         
 
         //Goal coordinate for soldier
-      //  soldierGoal = new Coordinate(3, 7);
-       
+        soldierGoal = new Coordinate(3, 7);
+        Instantiate(soldierGoalPrefab, Tiles[soldierGoal].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
 
 
 
-       
+
     }
     public void GeneratePath()
     {

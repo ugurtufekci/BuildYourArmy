@@ -19,6 +19,8 @@ public class Building : MonoBehaviour {
     public void Select()
     {
         mySpriteRenderer.enabled = !mySpriteRenderer.enabled;
-       
+        mySpriteRenderer.color = new Color(1f, 1f, 1f, .3f);
+
+
     }
 }

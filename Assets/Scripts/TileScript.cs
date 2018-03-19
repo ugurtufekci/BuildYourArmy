@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class TileScript : MonoBehaviour
 {
      public Coordinate GridPosition { get; private set; }
+   
 
     //Control the tile is avaliable or not
     public bool IsEmpty { get; private set; }
@@ -52,7 +53,7 @@ public class TileScript : MonoBehaviour
 
     void OnMouseDown()
     {
-         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
        
         //if user pick a barrack, we have to set each tile property IsEmpty=false for 3x3 surface.

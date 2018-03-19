@@ -311,12 +311,12 @@
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Astar.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\DebugTile.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Node.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\TestAstar.cs" />
     <Compile Include="Assets\Scripts\ScrollList.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\Soldier.cs" />
+    <Compile Include="Assets\Scripts\SpawnPoints.cs" />
     <Compile Include="Assets\Scripts\TileScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
